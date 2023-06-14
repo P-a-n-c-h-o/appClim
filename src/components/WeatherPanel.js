@@ -1,78 +1,78 @@
 /* eslint-disable no-throw-literal */
 /* eslint-disable no-unused-vars */
 // eslint-disable-next-line no-unused-vars
-import React, { useState} from 'react';
+import React, { useState } from 'react';
 import Form from './Formulario';
 import Card from './Card';
 
 const WeatherPanel = () => {
 
-    let urlWeather = "https://api.openweathermap.org/data/2.5/weather?appid=c93dc315927127214bf93e7cfb33ecfc&lang=es";
+    let urlWeather = "https://api.openweathermap.org/data/2.5/weather?appid=c93dc315927127214bf93e7cfb33ecfc&lang=ing";
     let cityUrl = "&q=";
 
-    let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?appid=c93dc315927127214bf93e7cfb33ecfc&lang=es";
+    let urlForecast = "https://api.openweathermap.org/data/2.5/forecast?appid=c93dc315927127214bf93e7cfb33ecfc&lang=ing";
 
     const [weather, setWeather] = useState();
     const [forecast, setForecast] = useState();
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
     const [location, setLocation] = useState("");
-    
-    const getLocation = async(loc) => {
+
+    const getLocation = async (loc) => {
         setLoading(true);
         setLocation(loc);
 
         //weather
         urlWeather = urlWeather + cityUrl + loc;
 
-        await fetch(urlWeather).then((response) =>{
-            if(!response.ok) throw {response}
+        await fetch(urlWeather).then((response) => {
+            if (!response.ok) throw { response }
             return response.json();
-        }).then((weatherData) =>{
+        }).then((weatherData) => {
             console.log(weatherData);
             setWeather(weatherData);
-        }).catch(error =>{
-            console.log (error);
+        }).catch(error => {
+            console.log(error);
             setLoading(false);
             setShow(false);
         });
 
         // Forecast
-        urlForecast = urlForecast + cityUrl + loc; 
-       
-        await fetch (urlForecast).then((response) => {
-            if(!response.ok) throw {response}
+        urlForecast = urlForecast + cityUrl + loc;
+
+        await fetch(urlForecast).then((response) => {
+            if (!response.ok) throw { response }
             return response.json();
-        }).then((forecastData) =>{
+        }).then((forecastData) => {
             console.log(forecastData);
             setForecast(forecastData);
-            
+
             setLoading(false);
             setShow(true);
 
 
-        }).catch(error =>{
+        }).catch(error => {
             console.log(error);
             setLoading(false);
             setShow(false);
         });
     }
 
-    return(
-       <React.Fragment>
-           <Form
-           newLocation = {getLocation}
+    return (
+        <React.Fragment>
+            <Form
+                newLocation={getLocation}
             />
 
             <Card
-            showData = {show}
-            loadingData = {loading}
-            weather = {weather}
-            forecast = {forecast}
-            location ={location}
+                showData={show}
+                loadingData={loading}
+                weather={weather}
+                forecast={forecast}
+                location={location}
             />
-        
-       </React.Fragment>
+
+        </React.Fragment>
     )
 
 }

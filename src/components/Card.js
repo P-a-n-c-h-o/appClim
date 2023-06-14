@@ -3,13 +3,13 @@ import React from 'react';
 import Spinner from './Spinner';
 
 
-const Card = ({loadingData, showData, weather, forecast}) => {
-/*
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
-*/
+const Card = ({ loadingData, showData, weather, forecast }) => {
+    /*
+        var today = new Date();
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date+' '+time;
+    */
     var today = new Date();
     var day = today.getDate();
     var month = today.getMonth() + 1;
@@ -25,85 +25,85 @@ const Card = ({loadingData, showData, weather, forecast}) => {
     var forecastDate9 = "";
 
 
-    
 
-    if(loadingData){
-         return  <Spinner/>;
+
+    if (loadingData) {
+        return <Spinner />;
     }
-    
 
-    if(showData){
-        url = "https://openweathermap.org/img/w/" ;
+
+    if (showData) {
+        url = "https://openweathermap.org/img/w/";
         iconUrl = url + weather.weather[0].icon + ".png";
         iconUrl3 = url + forecast.list[1].weather[0].icon + ".png";
         iconUrl6 = url + forecast.list[2].weather[0].icon + ".png";
         iconUrl9 = url + forecast.list[3].weather[0].icon + ".png";
 
-        forecastDate3 = forecast.list[1].dt_txt.substring(8,10) + '/' + forecast.list[1].dt_txt.substring(5,7) + '/' + forecast.list[1].dt_txt.substring(0,4) + ' ' + forecast.list[1].dt_txt.substring(11,16);
-    forecastDate6 = forecast.list[2].dt_txt.substring(8,10) + '/' + forecast.list[2].dt_txt.substring(5,7) + '/' + forecast.list[2].dt_txt.substring(0,4) + ' ' + forecast.list[2].dt_txt.substring(11,16);
-    forecastDate9 = forecast.list[3].dt_txt.substring(8,10) + '/' + forecast.list[3].dt_txt.substring(5,7) + '/' + forecast.list[3].dt_txt.substring(0,4) + ' ' + forecast.list[3].dt_txt.substring(11,16);
+        forecastDate3 = forecast.list[1].dt_txt.substring(8, 10) + '/' + forecast.list[1].dt_txt.substring(5, 7) + '/' + forecast.list[1].dt_txt.substring(0, 4) + ' ' + forecast.list[1].dt_txt.substring(11, 16);
+        forecastDate6 = forecast.list[2].dt_txt.substring(8, 10) + '/' + forecast.list[2].dt_txt.substring(5, 7) + '/' + forecast.list[2].dt_txt.substring(0, 4) + ' ' + forecast.list[2].dt_txt.substring(11, 16);
+        forecastDate9 = forecast.list[3].dt_txt.substring(8, 10) + '/' + forecast.list[3].dt_txt.substring(5, 7) + '/' + forecast.list[3].dt_txt.substring(0, 4) + ' ' + forecast.list[3].dt_txt.substring(11, 16);
     }
 
     return (
-       < div className="mt-5">
+        < div className="mt-5">
 
-           {
+            {
                 showData === true ? (
 
                     <div className="container">
                         <div className="card mb-3 mx-auto bg-dark text-light">
-                            <div className="row g-0"> 
-                                < div className="col-md-4"> 
-                                <h3 className="card-title">{weather.name}</h3>
-                                <p className="card-date">{date}</p>
-                                
-                                <h1 className="card-temp">{(weather.main.temp - 273.15).toFixed(1)}°C</h1>
-                                <p className="card-desc"> <img src={iconUrl} alt="icon"/>{weather.weather[0].description}</p>
+                            <div className="row g-0">
+                                < div className="col-md-4">
+                                    <h3 className="card-title">{weather.name}</h3>
+                                    <p className="card-date">{date}</p>
 
-                                <img src= "https://images.pexels.com/photos/1785493/pexels-photo-1785493.jpeg?cs=srgb&dl=pexels-kasuma-1785493.jpg&fm=jpg" className="img-fluid rounded-start" alt=".."/>
-                            </div>
-                             <div className="col-md-8"> 
-                                 <div className="card-body text-start mt-2">
-                                     <h5 className="card-text"> Temperatura máxima:{(weather.main.temp_max -273.15).toFixed(1)}°C</h5> 
-                                     <h5 className="card-text"> Temperatura mínima:{(weather.main.temp_min -273.15).toFixed(1)}°C</h5>  
-                                     <h5 className="card-text"> Sensación térmica:{(weather.main.feels_like -273.15).toFixed(1)}°C</h5> 
-                                     <h5 className="card-text">Humedad:{weather.main.humidity}%</h5>
-                                     <h5 className="card-text">Vlocidad del viento:{weather.wind.speed}m/s</h5>  
+                                    <h1 className="card-temp">{(weather.main.temp - 273.15).toFixed(1)}°C</h1>
+                                    <p className="card-desc"> <img src={iconUrl} alt="icon" />{weather.weather[0].description}</p>
 
-                                     </div>
-                                     <hr/>
-
-                                     <div className = "row mt-4">
-                                            <div className="col">
-                                                <p>{forecastDate3}h</p>
-                                                <p className="description"><img src={iconUrl3} alt= "icon"/>{forecast.list[1].weather[0].description}</p>
-                                                <p className="temp">{(forecast.list[1].main.temp - 273.15).toFixed(1)}°C</p>
-                                                </div>
-                                                <div className="col">
-                                                <p>{forecastDate6}h</p>
-                                                <p className="description"><img src={iconUrl6} alt= "icon"/>{forecast.list[2].weather[0].description}</p>
-                                                <p className="temp">{(forecast.list[2].main.temp - 273.15).toFixed(1)}°C</p>
-                                                </div>
-                                                <div className="col">
-                                                <p>{forecastDate9}h</p>
-                                                <p className="description"><img src={iconUrl9} alt= "icon"/>{forecast.list[3].weather[0].description}</p>
-                                                <p className="temp">{(forecast.list[3].main.temp - 273.15).toFixed(1)}°C</p>
-                                                </div>
-
-
-                                     </div>
-                                
+                                    <img src="https://images.pexels.com/photos/1785493/pexels-photo-1785493.jpeg?cs=srgb&dl=pexels-kasuma-1785493.jpg&fm=jpg" className="img-fluid rounded-start" alt=".." />
                                 </div>
-                             </div>
+                                <div className="col-md-8">
+                                    <div className="card-body text-start mt-2">
+                                        <h5 className="card-text"> Maximum temperature:{(weather.main.temp_max - 273.15).toFixed(1)}°C</h5>
+                                        <h5 className="card-text"> Minimum temperature:{(weather.main.temp_min - 273.15).toFixed(1)}°C</h5>
+                                        <h5 className="card-text"> Feels like:{(weather.main.feels_like - 273.15).toFixed(1)}°C</h5>
+                                        <h5 className="card-text">Humidity:{weather.main.humidity}%</h5>
+                                        <h5 className="card-text">Wind speed:{weather.wind.speed}m/s</h5>
+
+                                    </div>
+                                    <hr />
+
+                                    <div className="row mt-4">
+                                        <div className="col">
+                                            <p>{forecastDate3}</p>
+                                            <p className="description"><img src={iconUrl3} alt="icon" />{forecast.list[1].weather[0].description}</p>
+                                            <p className="temp">{(forecast.list[1].main.temp - 273.15).toFixed(1)}°C</p>
+                                        </div>
+                                        <div className="col">
+                                            <p>{forecastDate6}h</p>
+                                            <p className="description"><img src={iconUrl6} alt="icon" />{forecast.list[2].weather[0].description}</p>
+                                            <p className="temp">{(forecast.list[2].main.temp - 273.15).toFixed(1)}°C</p>
+                                        </div>
+                                        <div className="col">
+                                            <p>{forecastDate9}h</p>
+                                            <p className="description"><img src={iconUrl9} alt="icon" />{forecast.list[3].weather[0].description}</p>
+                                            <p className="temp">{(forecast.list[3].main.temp - 273.15).toFixed(1)}°C</p>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
                         </div>
                     </div>
                 ) : (
-                     <h2 className="text-light"> sin datos </h2>
+                    <h2 className="text-light"> SEARCH YOUR PLACE IN THE WORLD </h2>
                 )
-           }
-          
+            }
 
-       </div>
+
+        </div>
     );
 
 }

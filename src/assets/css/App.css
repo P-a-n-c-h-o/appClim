@@ -1,8 +1,26 @@
 body {
-  background-color:rgb(17, 43, 75);
+  max-width: 1000%;
+
+
+  background-color: rgb(17, 43, 75);
+}
+
+.head {
+  max-width: 100%;
+  font-family: 'comic Sans MS,cursive';
+  text-align: center;
+  padding: 0%;
+  height: 177%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: rgb(247, 247, 247);
+  text-decoration-style: wavy;
 }
 
 .App {
+  width: 100%;
   text-align: center;
 }
 
@@ -11,7 +29,7 @@ body {
 }
 
 .card {
-  max-width: 60%;
+  max-width: 100%;
 }
 
 .card-title {
@@ -25,6 +43,7 @@ body {
   padding-left: 6px;
   margin-top: 40px;
 }
+
 .card-temp {
   position: absolute;
   padding-left: 90px;
@@ -38,7 +57,7 @@ body {
   margin-top: 320px;
 }
 
-@media (max-width: 1399px) {
+@media (max-width: 995px) {
   .card {
     max-width: 100%;
   }
